@@ -30,14 +30,10 @@ function displayBackgroundImage(type, backgroundPath) {
   overlayDiv.style.zIndex = "-1";
   overlayDiv.style.opacity = "0.2";
 
-  console.log("FROM DISPLAY:::::", overlayDiv);
-
   if (type === "movie") {
     document.querySelector("#movie-details").appendChild(overlayDiv);
   } else {
     document.querySelector("#show-details").appendChild(overlayDiv);
-    console.log("DONNEEEEEghjkE");
-    console.log(document.querySelector("#show-details"));
   }
 
   return overlayDiv;
@@ -118,7 +114,6 @@ async function displayPopularMovies() {
   `;
     document.querySelector("#popular-movies").appendChild(div);
   });
-  console.log(results);
 }
 
 async function displayPopularShows() {
@@ -151,7 +146,6 @@ async function displayPopularShows() {
     `;
     document.querySelector("#popular-shows").appendChild(div);
   });
-  console.log(results);
 }
 
 async function displayMovieDetails() {
@@ -216,14 +210,11 @@ async function displayMovieDetails() {
 
   document.querySelector("#movie-details").appendChild(div);
   document.querySelector("#movie-details").appendChild(overlayDiv);
-  console.log(movieId);
 }
 
 async function displayShowDetails() {
   const showId = window.location.search.split("=")[1];
   const show = await fetchAPIData(`tv/${showId}`);
-  console.log("YOOO::::", show.backdrop_path);
-  console.log(show);
 
   const overlayDiv = displayBackgroundImage("tv", show.backdrop_path);
   document.querySelector("#show-details").innerHTML = "";
@@ -289,7 +280,6 @@ async function displayShowDetails() {
 
   document.querySelector("#show-details").appendChild(div);
   document.querySelector("#show-details").appendChild(overlayDiv);
-  console.log(showId);
 }
 
 async function fetchAPIData(endpoint) {
@@ -310,9 +300,7 @@ async function fetchAPIData(endpoint) {
     hideSpinner();
     return data;
     //console.log(data);
-  } catch (e) {
-    console.log("OUCH:::", e);
-  }
+  } catch (e) {}
 }
 
 async function searchAPIData(endpoint) {
@@ -352,7 +340,6 @@ function hightlightActiveLink() {
     if (link.getAttribute("href") === global.currentPage) {
       link.classList.add("active");
     }
-    console.log(link.getAttribute("href"));
   });
 }
 
@@ -474,7 +461,7 @@ const init = () => {
       displayPopularMovies();
       break;
 
-    case "/shows.html":
+    case "/shows.html" || "/shows":
       displayPopularShows();
       break;
     case "/search.html":
